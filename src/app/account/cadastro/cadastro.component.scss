@@ -1,0 +1,40 @@
+@import "./helpers";
+
+.cadastro-card {
+  max-width: 450px;
+  margin: auto;
+  //background-color: #333;
+  .card-middle {
+    padding: 32px 32px 1px 32px;
+
+    form mat-form-field {
+      width: 100%;
+      opacity: 0.7;
+    }
+    .grid-text-button {
+      opacity: 0.5;
+      button {
+        height: 30px;
+        padding-left: 10px;
+      }
+    }
+    .underlined {
+      display: inline-block;
+      border-bottom: 1px solid $color-light-blue;
+    }
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .card-middle {
+    padding: 32px 10px 1px 10px !important;
+
+    .grid-button {
+      flex-direction: column-reverse !important;
+      .grid-text-button {
+        place-content: center !important;
+        align-items: center !important;
+      }
+    }
+  }
+}

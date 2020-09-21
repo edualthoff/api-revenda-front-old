@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+    <span class="header-spacer"></span>
+    <button mat-icon-button aria-label="Example icon-button with heart icon">
+        <mat-icon>favorite</mat-icon>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Configuracao do sistema">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Configuração</span>
+        </button>
+        <button mat-menu-item>
+            <mat-icon>support</mat-icon>
+            <span>Support</span>
+        </button>
+        <button mat-menu-item (click)="buttonSair()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Sair</span>
+        </button>
+    </mat-menu>
+</mat-toolbar>

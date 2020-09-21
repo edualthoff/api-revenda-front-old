@@ -1,0 +1,39 @@
+<mat-card fxFlex="450px" fxFlexAlign="center" fxFlex.sm="100%" fxFlex.xs="100%">
+    <mat-card-header>
+        <mat-card-title>Verificar Usuario</mat-card-title>
+    </mat-card-header>
+    <ng-container *ngTemplateOutlet="switch_expression ? verificadoTrue : verificadoFalse"></ng-container>
+</mat-card>
+
+<ng-template #verificadoTrue>
+    <mat-card-content fxLayoutAlign="center">
+        <section>
+            <p>E-mail verificado com sucesso. <br /></p>
+            <p>Realize o login e tenha acesso a ferramenta</p>
+            <div fxLayoutAlign="center">
+                <mat-progress-spinner diameter="30" style="margin-top: 10px;" color="accent" mode="indeterminate">
+                </mat-progress-spinner>
+            </div>
+        </section>
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+</ng-template>
+
+<ng-template #verificadoFalse>
+    <mat-card-content fxLayoutAlign="center">
+        <section>
+            <p>Prazo para verificar email expirou. Digite abaixo o email para uma nova confirmação. <br /></p>
+            <p>O prazo para confirmar o email é de 30 minutos</p>
+            <mat-form-field color="accent" appearance="legacy" style="padding-top: 15px;">
+                <mat-label>Email:</mat-label>
+                <input matInput [formControl]="emailForm" type="email">
+            </mat-form-field>
+        </section>
+    </mat-card-content>
+    <mat-card-actions>
+        <section fxFlex="200px">
+            <button mat-raised-button (click)="buttonEnviarEmail(emailForm.value)" cdkFocusInitial>Enviar Email</button>
+        </section>
+    </mat-card-actions>
+</ng-template>

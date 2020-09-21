@@ -1,0 +1,71 @@
+@import "./helpers";
+
+.button-sidenav-open {
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 15px;
+}
+.sidebar-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+mat-sidenav {
+  // let's take mat-toolbar's default theme
+  // ref: https://github.com/angular/material2/blob/88601fa51d581f538468a9b63890b0e285e519cb/src/lib/toolbar/_toolbar-theme.scss#L39
+  background-color: $layout-drawer-bg-color;
+  color: $layout-nav-color;
+  width: $layout-drawer-width;
+  border-right: none;
+  &.mat-drawer {
+    background-color: $layout-drawer-bg-color;
+  }
+  mat-toolbar {
+    text-align: center;
+    background-color: $layout-drawer-header-bg-color;
+    justify-content: center;
+  }
+}
+
+.menu-sidenav {
+  overflow-x: hidden;
+  margin-top: 60px;
+}
+
+.menu-sidenav-link {
+  //display: flex;
+  //align-items: center;
+  //padding-left: 15px;
+  font-size: $layout-drawer-font-size;
+  padding-top: 1px;
+  color: $layout-drawer-navigation-link-icon-color;
+  mat-icon {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: $layout-drawer-icon-size;
+  }
+  mat-icon ~ mat-icon {
+    position: absolute;
+    right: 8px;
+    @include rotate-x-transition(0, 0.4s);
+  }
+  &:hover {
+    color: $layout-drawer-navigation-link-active-color;
+  }
+  &--current {
+    color: $layout-drawer-navigation-link-active-color;
+    border-left: 2px solid $layout-drawer-navigation-link-active-color;
+    mat-icon ~ mat-icon {
+      @include rotate-x-transition(180, 0.4s);
+    }
+  }
+}
+.submenu-sidenav-link {
+    display: none;
+    &--show {
+        display: block;
+    }
+}

@@ -1,0 +1,18 @@
+
+<mat-sidenav-container color="primary" class="sidebar-container ">
+  <mat-sidenav #sidenav [mode]="(isHandset | async)!.matches ? 'over' : 'side'" [opened]="!(isHandset | async)!.matches ? true : false">
+    <mat-toolbar><header>{{title}}</header></mat-toolbar>
+    <mat-nav-list class="menu-sidenav">
+      <app-menu-item *ngFor="let item of menu" [data]="item" [moduloMain]="moduloMain" [modulo]="getModulo(item.modulo)"></app-menu-item>
+  </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!--
+      Icone / button para abrir e fechar o menu principal - sidenav - quando o display estiver max-widht 1440px
+    -->
+    <button mat-icon-button *ngIf="(isHandset | async)!.matches" class="button-sidenav-open" aria-label="Abre o menu principal" (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

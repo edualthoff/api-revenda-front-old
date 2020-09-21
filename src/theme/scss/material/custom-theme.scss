@@ -1,0 +1,29 @@
+// Imports Material
+@import './imports-material';
+
+@mixin custom-theme($theme) {
+  //@include sidenav-component-theme($theme);
+  @include autofilled-component-theme($theme);
+  @include snackbar-component-theme($theme);
+}
+
+@mixin sidenav-component-theme($theme) {
+  // retrieve variables from theme
+  // (all possible variables, use only what you really need)
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  mat-sidenav  {
+    // let's take mat-toolbar's default theme
+    // ref: https://github.com/angular/material2/blob/88601fa51d581f538468a9b63890b0e285e519cb/src/lib/toolbar/_toolbar-theme.scss#L39
+    background-color: mat-color($primary, layout-nav-color);
+    color: mat-color($foreground, text);
+    &.mat-drawer {
+        background-color:  mat-color($primary, layout-nav-color);
+    }
+  }
+  
+}

@@ -1,0 +1,127 @@
+<mat-card fxFlexAlign="center" class=" categorias-tab">
+    <mat-card-header>
+        <mat-card-title>Links de Buscas </mat-card-title>
+        <span class="header-space"></span>
+        <button mat-icon-button>
+            <mat-icon (click)="buttonAdicionar()">playlist_add</mat-icon>
+        </button>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="mat-elevation-z8 table-config">
+            <table #table mat-table [dataSource]="dataSource">
+
+                <!-- Id Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> # </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
+                            <div class="mobile-label">#: </div>
+                            <div>{{element.id | uppercase}} </div>
+                        </div>
+                </ng-container>
+
+                <!-- Links url Column -->
+                <ng-container matColumnDef="linkUrl">
+                    <th mat-header-cell *matHeaderCellDef> Links URL </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
+                            <div class="mobile-label">Links URL:</div>
+                            <div>{{element.linkUrl | uppercase}} </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Descrição Column -->
+                <ng-container matColumnDef="descricao">
+                    <th mat-header-cell *matHeaderCellDef> Descrição </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
+                            <div class="mobile-label"> Descrição: </div>
+                            <div>{{element.descricao }} </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Condicao - usado, novo - Column -->
+                <ng-container matColumnDef="condicao">
+                    <th mat-header-cell *matHeaderCellDef> Condição </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
+                            <div class="mobile-label"> Condição: </div>
+                            <div>{{element.condicao }} </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Ranger inicial Column -->
+                <ng-container matColumnDef="rangeInicial">
+                    <th mat-header-cell *matHeaderCellDef> Ranger Inicial </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
+                            <div class="mobile-label"> Ranger Inicial: </div>
+                            <div matPrefix>R$</div>
+                            <div>{{element.rangeInicial }} </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Ranger final Column -->
+                <ng-container matColumnDef="rangeFinal">
+                    <th mat-header-cell *matHeaderCellDef> Ranger Final </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
+                            <div class="mobile-label"> Ranger Final: </div>
+                            <div matPrefix>R$</div>
+                            <div>{{element.rangeFinal }} </div>
+                        </div>
+                    </td>
+                </ng-container>
+                <!-- Intervalo Column -->
+                <ng-container matColumnDef="intervalo">
+                    <th mat-header-cell *matHeaderCellDef> Intervalo </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
+                            <div class="mobile-label"> Status: </div>
+                            <div>{{element.schedulingTime.hours}}:{{element.schedulingTime.minutes}} </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Status Column -->
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let element">
+                        <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
+                            <div class="mobile-label"> Status: </div>
+                            <div>{{element.status }} </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <!-- Editar Column -->
+                <ng-container matColumnDef="editar">
+                    <th mat-header-cell *matHeaderCellDef> Editar </th>
+                    <td mat-cell *matCellDef="let element; let index">
+                        <div fxLayout="row inline" fxLayoutAlign="start start" fxLayoutGap="4px">
+                            <div class="mobile-label"> Editar: </div>
+                            <div>
+                                <button mat-icon-button>
+                                    <mat-icon class="sidenav-icon" (click)="buttonEditar(element)">edit</mat-icon>
+                                </button>
+                                <button mat-icon-button>
+                                    <mat-icon class="sidenav-icon" (click)="buttonExlcuir(element.id)">delete_forever
+                                    </mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5,10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

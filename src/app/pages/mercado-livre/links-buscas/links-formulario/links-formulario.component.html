@@ -1,0 +1,112 @@
+<mat-card fxFlex="50%" fxFlexAlign="center" fxFlex.sm="80%" fxFlex.xs="100%">
+    <mat-card-header>
+        <mat-card-title>{{titulo |titlecase}} Link de Busca </mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayoutAlign="center">
+        <form [formGroup]="linksForm" *ngIf="{
+            itensResults: (filteredOptions | async),
+            itensLoading: (loading$ | async)
+          } as obs">
+            <div fxFlex="100%" fxFlexAlign="center">
+                <!-- URL de busca -->
+                <mat-form-field class="quebrar-linha" color="accent">
+                    <mat-label>URL de busca:</mat-label>
+                    <input matInput formControlName="linkUrl" type="url" >
+                </mat-form-field>
+                <!-- Descrição -->
+                <mat-form-field color="accent">
+                    <mat-label>Gostaria de informar uma Descrição:</mat-label>
+                    <input formControlName="descricao" matInput #message maxlength="256">
+                    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+                </mat-form-field>
+                <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="start center" fxLayoutGap="50px" fxLayoutGap.xs="5px">
+                    <!-- Ranger Inicial -->
+                    <mat-form-field fxFlex="160px" fxFlex.xs="50px">
+                        <mat-label>Valor Inicial</mat-label>
+                        <input [formControlName]="'rangeInicial'" matInput type="text" mask="separator.2"
+                            thousandSeparator="." pattern="^[0-9.,]+$">
+                        <span matPrefix>R$&nbsp;</span>
+                        <!--<span matSuffix>.00</span>-->
+                    </mat-form-field>
+                    <!-- Ranger Final -->
+                    <mat-form-field fxFlex="160px" fxFlex.xs="50px">
+                        <mat-label>Valor Final</mat-label>
+                        <input [formControlName]="'rangeFinal'" matInput type="text" mask="separator.2"
+                            thousandSeparator=".">
+                        <span matPrefix>R$&nbsp;</span>
+                        <!-- <span matSuffix>.00</span>-->
+                    </mat-form-field>
+                </div>
+                <!-- Condicao -->
+                <section fxLayoutAlign="start center" fxLayoutGap="15px" style="margin-top: 15px;">
+                    <label>Condição:</label>
+                    <mat-radio-group [formControlName]="'condicao'">
+                        <mat-radio-button style="margin-right: 15px;" [value]="'USADO'">Usado</mat-radio-button>
+                        <mat-radio-button [value]="'NOVO'">Novo</mat-radio-button>
+                    </mat-radio-group>
+                </section>
+                <!-- Status -->
+                <section fxLayoutAlign="start center" fxLayoutGap="15px" style="margin-top: 15px;">
+                    <label>Status:</label>
+                    <mat-radio-group formControlName="status">
+                        <mat-radio-button style="margin-right: 15px;" [value]="true">Habilitar</mat-radio-button>
+                        <mat-radio-button [value]="false">Desabilitar</mat-radio-button>
+                    </mat-radio-group>
+                </section>
+                <!-- Scheduling Select -->
+                <div fxLayout="row">
+                    <mat-form-field color="accent" style="margin-top: 15px;" fxFlex="230px" fxFlex.xs="auto">
+                        <mat-label>Intervalo de Busca:</mat-label>
+                        <input matInput type="text" [formControl]="linksForm.get('timeCustom')" [edsTimePicker]="timePicker" 
+                            autocomplete="off" readonly>
+                        <mat-icon matSuffix>update</mat-icon>
+                        <eds-time-picker #timePicker [stepTime]="20" [timeFormat]="'24hr'" [displayWith]="displayFnTime"></eds-time-picker>
+                    </mat-form-field>
+                </div>
+                <!-- Categoria auto complete -->
+                <mat-form-field color="accent" style="padding-top: 12px;">
+                    <mat-label>Selecionar Produto:</mat-label>
+                    <input [formControl]="linksForm.get('idProduto')" matInput type="text"
+                        aria-label="Selecionar Produto" [matAutocomplete]="matAuto">
+                    <mat-hint>Selecione uma categoria</mat-hint>
+                    <mat-autocomplete #matAuto [displayWith]="displayFn">
+                        <!-- Loading - Carregando a lista -->
+                        <mat-option disabled class="loading" *ngIf="obs.itensLoading">
+                            <mat-spinner diameter="35"></mat-spinner>
+                        </mat-option>
+                        <!-- Não pode esta carregando e a lista de itens = 0, Não a itens com parametro informado -->
+                        <mat-option disabled *ngIf="obs.itensResults?.length === 0 && !obs.loading">
+                            Não existe o item. Criar um: <strong><a
+                                    [routerLink]="[ '../../../produtos/itens/adicionar' ]"
+                                    routerLinkActive="active">Click AQUI</a></strong>
+                        </mat-option>
+                        <ng-container *ngIf="!obs.itensLoading">
+                            <ng-container *ngFor="let itensOptionGroup of obs.itensResults; let i=index">
+                                <mat-optgroup [label]="itensOptionGroup.categoriasModal.nome"
+                                    *ngIf="i === 0 || itensOptionGroup.idCategoria !== obs.itensResults[i-1].idCategoria">
+                                    <ng-container *ngFor="let itensOption of obs.itensResults">
+                                        <mat-option [value]="itensOption"
+                                            *ngIf="itensOptionGroup.categoriasModal.nome == itensOption.categoriasModal.nome ">
+                                            {{ itensOption.modelo }}
+                                        </mat-option>
+                                    </ng-container>
+                                </mat-optgroup>
+                            </ng-container>
+                        </ng-container>
+                    </mat-autocomplete>
+                </mat-form-field>
+            </div>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button (click)="buttonSair()">Sair</button>
+        <button mat-button (click)="buttonSalvar()" [disabled]="linksForm.status !== 'VALID'"
+            cdkFocusInitial>Salvar</button>
+    </mat-card-actions>
+</mat-card>
+
+<!--                 <div> form: {{selectAuto2 }} </div>
+                <div *ngFor="let item of obs.itensResults; let i=index">
+                    a: {{item.categoriasModal.nome }} aa {{item.idCategoria}} i {{i}}
+                </div>
+                <div>{{linksForm.get(['rangerInicial']).value}}</div> -->

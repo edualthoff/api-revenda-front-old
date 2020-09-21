@@ -1,0 +1,11 @@
+
+@mixin snackbar-component-theme($theme) {
+    $primary: map-get($theme, primary);
+    $background-color:  map-get($primary, main);
+    $warn: map-get($theme, warn);
+  
+    .snackbar-error {
+        background-color: map-get($warn, 700);
+        opacity: 0.9 !important;
+    }
+  }

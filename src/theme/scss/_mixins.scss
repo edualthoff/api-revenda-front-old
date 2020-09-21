@@ -1,0 +1,12 @@
+@mixin rotate-x-transition($deg: 90, $trans: 0.5s) {
+    $sDeg: #{$deg}deg;
+    $sTrans: #{$trans};
+
+    -webkit-transform: rotateX($sDeg);
+    -moz-transform: rotateX($sDeg);
+    -ms-transform: rotateX($sDeg);
+    -o-transform: rotateX($sDeg);
+    transform: rotateX($sDeg);
+    transition: ($sTrans);
+
+}

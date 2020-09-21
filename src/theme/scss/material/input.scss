@@ -1,0 +1,27 @@
+@import "~@angular/cdk/text-field/text-field";
+
+// Set custom-autofill inputs to have no background and red text.
+@mixin autofilled-component-theme($theme) {
+  $background: map-get($theme, primary);
+  $background-color:  map-get($background, main);
+  $foreground: map-get($theme, foreground);
+
+  input.cdk-text-field-autofilled {
+    -webkit-text-fill-color: mat-color($foreground, text);
+    -webkit-box-shadow: 0 0 0px 1000px $background-color inset !important;
+    transition: $background-color 5000s ease-in-out 0s;
+    opacity: 1;
+  }
+}
+
+/*
+@import '~@angular/cdk/text-field/text-field'; 
+
+// Set custom-autofill inputs to have no background and red text.
+input.cdk-text-field-autofilled {
+    -webkit-text-fill-color: $todo-input-text-highlight-color;
+    -webkit-box-shadow: 0 0 0px 1000px #515151 inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+    opacity: 1;
+  //@include cdk-text-field-autofill-color(black, red);
+}*/

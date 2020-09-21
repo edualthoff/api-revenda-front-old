@@ -1,0 +1,20 @@
+//@import '../theme/helpers';
+
+html,body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    //font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html {
+    color: $text-color-primary;
+}
+
+main {
+    background: url("#{$image-path}/Dark_background_1920x1080.png") center top no-repeat;
+    background-size: cover;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+}

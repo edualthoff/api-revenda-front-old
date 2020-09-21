@@ -1,0 +1,144 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import './helpers';
+@import '~@angular/material/theming';
+
+
+// Fonts
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined');
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+     
+$fontConfig: (
+  display-4: mat-typography-level(112px, 112px, 300, 'Roboto', -0.0134em),
+  display-3: mat-typography-level(56px, 56px, 400, 'Roboto', -0.0089em),
+  display-2: mat-typography-level(45px, 48px, 400, 'Roboto', 0.0000em),
+  display-1: mat-typography-level(34px, 40px, 400, 'Roboto', 0.0074em),
+  headline: mat-typography-level(24px, 32px, 400, 'Roboto', 0.0000em),
+  title: mat-typography-level(20px, 32px, 500, 'Roboto', 0.0075em),
+  subheading-2: mat-typography-level(16px, 28px, 400, 'Roboto', 0.0094em),
+  subheading-1: mat-typography-level(15px, 24px, 500, 'Roboto', 0.0067em),
+  body-2: mat-typography-level(14px, 24px, 500, 'Roboto', 0.0179em),
+  body-1: mat-typography-level(14px, 20px, 400, 'Roboto', 0.0179em),
+  button: mat-typography-level(14px, 14px, 500, 'Roboto', 0.0893em),
+  caption: mat-typography-level(12px, 20px, 400, 'Roboto', 0.0333em),
+  input: mat-typography-level(inherit, 1.125, 400, 'Roboto', 1.5px)
+);
+
+/***/
+
+// Dark Theme text
+$light-text: #ffffff;
+$light-primary-text: $light-text;
+$light-accent-text: rgba($light-primary-text, 0.7);
+$light-disabled-text: rgba($light-primary-text, 0.5);
+$light-dividers: rgba($light-primary-text, 0.12);
+$light-focused: rgba($light-primary-text, 0.12);
+
+$mat-dark-theme-foreground: (
+  base:              $light-text,
+  divider:           $light-dividers,
+  dividers:          $light-dividers,
+  disabled:          $light-disabled-text,
+  disabled-button:   rgba($light-text, 0.3),
+  disabled-text:     $light-disabled-text,
+  elevation:         black,
+  hint-text:         $light-disabled-text,
+  secondary-text:    $light-accent-text,
+  accent-text:       $light-accent-text,
+  icon:              $light-text,
+  icons:             $light-text,
+  text:              $light-text,
+  slider-min:        $light-text,
+  slider-off:        rgba($light-text, 0.3),
+  slider-off-active: rgba($light-text, 0.3),
+);
+
+
+// Dark bg
+$dark-background:     #444444;
+$dark-bg-lighter-5:   lighten($dark-background, 5%);
+$dark-bg-lighter-10:  lighten($dark-background, 10%);
+$dark-bg-lighter-20:  lighten($dark-background, 20%);
+$dark-bg-lighter-30:  lighten($dark-background, 30%);
+$light-bg-alpha-4:    rgba(#000, 0.20);
+$light-bg-alpha-12:   rgba(#000, 0.12);
+
+// Background palette for dark themes.
+$mat-dark-theme-background: (
+  background:               $dark-background,
+  status-bar:               $dark-bg-lighter-20,
+  app-bar:                  $dark-bg-lighter-5,
+  hover:                    $light-bg-alpha-4,
+  card:                     $dark-bg-lighter-5,
+  dialog:                   $dark-bg-lighter-5,
+  tooltip:                  $dark-bg-lighter-20,
+  disabled-button:          $light-bg-alpha-12,
+  raised-button:            $dark-bg-lighter-5,
+  focused-button:           $light-focused,
+  selected-button:          $dark-bg-lighter-20,
+  selected-disabled-button: $dark-bg-lighter-30,
+  disabled-button-toggle:   $dark-bg-lighter-10,
+  unselected-chip:          $dark-bg-lighter-20,
+  disabled-list-option:     $dark-bg-lighter-10,
+);
+
+// Plus imports for other components in your app.
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core($fontConfig);
+$mat-primary: (
+  main: $dark-bg-lighter-5,
+  lighter: $dark-bg-lighter-20,
+  darker: $dark-background,
+  200: #786a6a, // For slide toggle,
+  contrast : (
+    main: $light-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+$mat-accent: (
+  main: #00bcd4,
+  lighter: #b3ebf2,
+  darker: #00adc9,
+  200: #00bcd4, // For slide toggle,
+  contrast : (
+    main: $dark-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+$mat-warn: (
+  main: #ff0000,
+  lighter: #ffb3b3,
+  darker: #ff0000,
+  200: #ff0000, // For slide toggle,
+  contrast : (
+    main: $light-primary-text,
+    lighter: $dark-primary-text,
+    darker: $light-primary-text,
+  )
+);
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$ml-app-primary: mat-palette($mat-primary, $default: main, $lighter: lighter, $darker: darker);
+$ml-app-accent: mat-palette($mat-accent, $default: main, $lighter: lighter, $darker: darker);
+// The warn palette is optional (defaults to red).
+$ml-app-warn: mat-palette($mat-red);
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$ml-app-theme: mat-dark-theme(( color: ( primary: $ml-app-primary, accent: $ml-app-accent, warn: $ml-app-warn, )));
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($ml-app-theme);
+
+// Custom Theme Material Color
+@import './scss/material/custom-theme';
+
+@include custom-theme($ml-app-theme);
+
+@import './scss/layout';
+@import './scss/imports';

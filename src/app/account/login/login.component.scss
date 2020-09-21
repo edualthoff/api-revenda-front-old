@@ -1,0 +1,32 @@
+.login-card {
+  //max-width: 450px;
+  margin: auto;
+  //background-color: #333;
+  .card-middle {
+    padding: 32px 32px 1px 32px;
+
+    form mat-form-field {
+      width: 100%;
+      padding-bottom: 8px;
+      opacity: 0.9;
+    }
+    .grid-text-button {
+      opacity: 0.5;
+      button {
+        height: 30px;
+        padding-left: 10px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 370px) {
+
+    .grid-button {
+        flex-direction: column-reverse !important;
+        .grid-text-button {
+            place-content: center !important;
+            align-items: center !important;
+        }
+    }
+}

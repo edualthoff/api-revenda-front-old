@@ -1,0 +1,31 @@
+mat-card {
+  overflow: auto;
+  mat-card-header {
+    min-width: 300px;
+    width: auto;
+    max-width: 100%;
+  }
+  mat-card-content {
+    padding-top: 20px;
+    min-width: 300px;
+    width: auto;
+    max-width: 100%;
+    form {
+      width: 90%;
+    }
+    mat-form-field {
+      width: 100%;
+    }
+  }
+  mat-card-actions {
+    margin-left: 5%;
+    margin-right: 0px;
+    padding-bottom: 13px !important;
+    button {
+      width: 100px;
+    }
+    input[type="number"] {
+      width: 120px;
+    }
+  }
+}

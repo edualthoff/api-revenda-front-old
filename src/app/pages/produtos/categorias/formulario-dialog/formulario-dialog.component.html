@@ -1,0 +1,30 @@
+<h1 mat-dialog-title> Categorias</h1>
+<form [formGroup]="categoriaForm">
+  <div mat-dialog-content style="height: 150px;">
+    <p>Gostaria de adicionar uma categoria?</p>
+    <mat-form-field color="accent">
+      <mat-label>Nome:</mat-label>
+      <input matInput formControlName="nome">
+    </mat-form-field>
+    <div>
+      <label class="quebrar-linha" style="padding-bottom: 6px;">Status: </label>
+      <mat-radio-group formControlName="status">
+        <mat-radio-button style="padding-right: 11px;" [value]="true">Ativar</mat-radio-button>
+        <mat-radio-button [value]="false">Desativar</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+</form>
+<div mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="false">Sair</button>
+  <button mat-button
+    [disabled]="((categoriaForm.status !== 'VALID') || (this.statusBase === categoriaForm.controls.status.value))"
+    (click)="submitForm()" cdkFocusInitial>Salvar</button>
+</div>
+<!--{{this.statusBase}}
+  {{categoriaForm.get('status').value}}-->
+
+
+<!-- Copyright 2020 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->

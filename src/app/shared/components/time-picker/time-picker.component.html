@@ -1,0 +1,74 @@
+<ng-template cdk-portal #overlayTemplate="cdkPortal">
+    <mat-card id="containerTimePicker">
+        <time class="time-container">
+            <!-- Actual Time -->
+            <div class="time" fxLayout="row">
+                <!-- Hours Section -->
+                <div fxLayout="column">
+                    <button tabindex="-1" mat-icon-button color="accent"
+                        (click)="incraseTime('hours')">
+                        <mat-icon>keyboard_arrow_up</mat-icon>
+                    </button>
+
+                    <mat-form-field style="width: 40px;" appearance="outline">
+                        <input tabindex="1" #hoursField cdkFocusInitial matInput 
+                            [(ngModel)]="timeCustom.hours" autocomplete="off"
+                            readonly>
+                    </mat-form-field>
+
+                    <button tabindex="-1" mat-icon-button color="accent"
+                        (click)="decreaseTime('hours')">
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+                    </button>
+                </div>
+
+                <!-- Times Separator -->
+                <span style="width: 10px; margin: 0 10px;">:</span>
+
+                <!-- Hours Section -->
+                <div fxLayout="column">
+                    <button tabindex="-1" mat-icon-button color="accent"
+                        (click)="incraseTime('minutes')">
+                        <mat-icon>keyboard_arrow_up</mat-icon>
+                    </button>
+
+                    <mat-form-field style="width: 40px;" appearance="outline">
+                        <input tabindex="2" #minutesField matInput 
+                            [(ngModel)]="timeCustom.minutes" autocomplete="off"
+                            readonly>
+                    </mat-form-field>
+
+                    <button tabindex="-1" mat-icon-button color="accent" 
+                        (click)="decreaseTime('minutes')">
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+                    </button>
+                </div>
+
+                <!-- AM/PM -->
+                <div fxLayout="column" class="AM-PM" *ngIf="!meridiemHidden">
+                    <button tabindex="-1" mat-icon-button color="accent" 
+                        [disabled]="timeCustom.meridiem === 'AM'"
+                        (click)="toggleAMPM('AM')">
+                        <mat-icon>keyboard_arrow_up</mat-icon>
+                    </button>
+                    <div style="margin: 17px 0;">{{timeCustom.meridiem}}</div>
+                    <button tabindex="-1" mat-icon-button color="accent" 
+                        [disabled]="timeCustom.meridiem === 'PM'"
+                        (click)="toggleAMPM('PM')">
+                        <mat-icon>keyboard_arrow_down</mat-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div class="divider">
+                <mat-divider></mat-divider>
+            </div>
+
+            <!-- Action Buttons -->
+            <div fxLayoutAlign="space-between center">
+                <button mat-button color="default" tabindex="-1" style="width: 110px;" (click)="onCancel()">Cancelar</button>
+                <button mat-button color="primary" tabindex="3" style="width: 110px;" (click)="onSetTime(timeCustom)">Set</button>
+            </div>
+        </time>
+    </mat-card>
+</ng-template>

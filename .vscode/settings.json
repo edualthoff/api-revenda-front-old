@@ -1,0 +1,7 @@
+{
+    "cSpell.words": [
+        "primarydark",
+        "secondarydarl"
+    ],
+    "autoimport.filesToScan": "{src,e2e,node_modules}/**/*.{ts,tsx}"
+}

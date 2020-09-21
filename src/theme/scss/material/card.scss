@@ -1,0 +1,44 @@
+mat-card {
+  overflow: auto;
+  padding: 0px 0px 16px 0px !important;
+  margin: 16px auto;
+  mat-card-header {
+    min-width: 300px;
+    width: auto;
+    max-width: 100%;
+    padding-top: 20px;
+    padding-bottom: 6px;
+    background: $card-title-background-color !important;
+  }
+  mat-card-content {
+    padding-top: 20px;
+    min-width: 300px;
+    width: auto;
+    max-width: 100%;
+    section {
+      width: 90%;
+    }
+    form {
+      width: 90%;
+    }
+    mat-form-field {
+      width: 100%;
+    }
+  }
+  mat-card-actions {
+    margin-left: 5% !important;
+    margin-right: 0px !important;
+    padding-bottom: 13px !important;
+    section {
+      width: 90%;
+    }
+    button {
+      min-width: 100px;
+      width: auto;
+      //max-width: 100%;
+    }
+    input[type="number"] {
+      width: 120px;
+    }
+  }
+}

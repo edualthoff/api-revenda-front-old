@@ -3,7 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  serverUrl: 'http://localhost:8080',
+  serverAuthUtl: 'http://localhost:8083',
+  loginUrl: 'http://localhost:8083/oauth/token',
+ // signinUrl: 'http://localhost:8080/api/signin',
+  clientId: 'frontangular',
+  clientSecret: "6eX;nLclEooE<#'Rg3f{NBfe)pbk,W"
 };
 
 /*

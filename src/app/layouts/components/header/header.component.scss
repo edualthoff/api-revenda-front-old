@@ -1,0 +1,10 @@
+@import './scss/material/_variable';
+
+mat-toolbar {
+  background-color: $header-background-color;
+  .header-spacer {    
+    flex: 1 1 auto;
+  }
+}
+
+  
